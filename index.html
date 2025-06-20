@@ -1,629 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Babypauul — Producer. Engineer. Artist.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Babypauul: Elite sound engineering & raw artistry. Trap & hip-hop producer. Listen, book, and explore the portfolio.">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900|Barlow:400,700|Anton&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #111217;
-      --card: #191a22;
-      --accent-blue: #00FFFF;
-      --accent-red: #FF0033;
-      --accent-violet: #B026FF;
-      --text: #F8F9FB;
-      --subtext: #A9A9B8;
-      --font-header: 'Montserrat', 'Anton', Arial, sans-serif;
-      --font-body: 'Barlow', Arial, sans-serif;
-      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    a { color: var(--accent-blue); text-decoration: none; transition: color var(--transition);}
-    a:hover { color: var(--accent-violet);}
-    header.hero {
-      position: relative;
-      width: 100%;
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      /* Replace with your own background/video as needed */
-    }
-    header.hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(20,20,30,0.72);
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 2rem;
-    }
-    .hero-title {
-      font-family: var(--font-header);
-      font-size: 2.5rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--accent-blue);
-      margin-bottom: 0.6rem;
-      text-shadow: 0 2px 20px #000a;
-      line-height: 1.2;
-    }
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--text);
-      margin-bottom: 2rem;
-      font-weight: 400;
-    }
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-    .cta-btn {
-      padding: 0.85rem 2.5rem;
-      border: none;
-      border-radius: 28px;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
-      color: #18191f;
-      font-weight: bold;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 16px #0ff4;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-      outline: none;
-    }
-    .cta-btn:hover {
-      background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
-      transform: scale(1.07);
-      color: var(--text);
-    }
-    /* Main content sections */
-    main { flex: 1 0 auto; width: 100%; }
-    section {
-      max-width: 1200px;
-      margin: 0 auto 4rem auto;
-      padding: 2.5rem 1.2rem 0 1.2rem;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity var(--transition), transform var(--transition);
-    }
-    section.visible { opacity: 1; transform: none;}
-    section h2 {
-      font-family: var(--font-header);
-      font-size: 2rem;
-      color: var(--accent-violet);
-      margin-bottom: 1.2rem;
-      letter-spacing: 1px;
-    }
-    /* About */
-    .about-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2.5rem;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .about-text {
-      flex: 1 1 350px;
-      min-width: 270px;
-    }
-    .about-text p {
-      font-size: 1.13rem;
-      margin-bottom: 1rem;
-    }
-    .about-text b {
-      display: block;
-      font-size: 1.18rem;
-      color: var(--accent-blue);
-      margin-bottom: 0.7rem;
-      font-weight: 700;
-    }
-    .about-img {
-      flex: 1 1 270px;
-      min-width: 200px;
-      text-align: center;
-    }
-    .about-img img {
-      width: 220px;
-      max-width: 100%;
-      border-radius: 50%;
-      border: 3px solid var(--accent-violet);
-      box-shadow: 0 4px 24px #B026FF66;
-      background: #222;
-      object-fit: cover;
-    }
-    /* Services */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .service-card {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 2rem 1.2rem;
-      box-shadow: 0 2px 10px #00ffff33;
-      text-align: center;
-      transition: box-shadow var(--transition), transform var(--transition);
-      border: 1.5px solid transparent;
-    }
-    .service-card:hover {
-      box-shadow: 0 6px 24px #FF003344;
-      border: 1.5px solid var(--accent-red);
-      transform: translateY(-7px) scale(1.03);
-    }
-    .service-card .icon {
-      font-size: 2.4rem;
-      margin-bottom: 1rem;
-      color: var(--accent-blue);
-      transition: color var(--transition);
-    }
-    .service-card:hover .icon {
-      color: var(--accent-red);
-    }
-    .service-title {
-      font-family: var(--font-header);
-      font-weight: bold;
-      font-size: 1.18rem;
-      margin-bottom: 0.7rem;
-    }
-    .service-desc {
-      color: var(--subtext);
-      font-size: 1rem;
-    }
-    .service-btn {
-      margin-top: 1.2rem;
-      background: var(--accent-violet);
-      color: #fff;
-      border: none;
-      border-radius: 24px;
-      padding: 0.5rem 1.8rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-    }
-    .service-btn:hover {
-      background: var(--accent-blue);
-      color: #18191f;
-    }
-    /* Portfolio */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.6rem;
-      margin-top: 2rem;
-    }
-    .track-card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 1.2rem 1rem 1.7rem 1rem;
-      box-shadow: 0 2px 12px #00ffff22;
-      position: relative;
-      text-align: center;
-      transition: box-shadow var(--transition), transform var(--transition);
-    }
-    .track-card:hover {
-      box-shadow: 0 6px 24px #B026FF66;
-      transform: translateY(-6px) scale(1.02);
-    }
-    .track-art {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      object-fit: cover;
-      border: 2px solid var(--accent-blue);
-      background: #222;
-    }
-    .track-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 0.4rem;
-      color: var(--accent-blue);
-    }
-    .track-player {
-      margin-bottom: 0.4rem;
-    }
-    /* My Music */
-    .music-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .music-card {
-      background: var(--card);
-      border-radius: 14px;
-      padding: 1rem 1rem 1.3rem 1rem;
-      box-shadow: 0 1px 7px #B026FF33;
-      text-align: center;
-      transition: box-shadow var(--transition), transform var(--transition);
-      position: relative;
-    }
-    .music-card:hover {
-      box-shadow: 0 6px 18px #FF003344;
-      transform: scale(1.03);
-    }
-    .music-art {
-      width: 72px;
-      height: 72px;
-      border-radius: 10px;
-      margin-bottom: 0.8rem;
-      object-fit: cover;
-      border: 2px solid var(--accent-violet);
-    }
-    .music-title {
-      font-size: 1.08rem;
-      font-weight: bold;
-      margin-bottom: 0.4rem;
-      color: var(--accent-violet);
-    }
-    .music-link {
-      display: inline-block;
-      margin-bottom: 0.5rem;
-      color: var(--accent-blue);
-      font-weight: 600;
-      transition: color var(--transition);
-    }
-    .music-link:hover {
-      color: var(--accent-red);
-    }
-    .music-quote {
-      font-style: italic;
-      color: var(--accent-blue);
-      font-size: 0.98rem;
-      margin-top: 0.7rem;
-      border-left: 3px solid var(--accent-blue);
-      padding-left: 0.9rem;
-    }
-    /* Testimonials */
-    .testimonials {
-      margin-top: 2rem;
-    }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.3rem;
-      margin-top: 1.3rem;
-    }
-    .testimonial-card {
-      background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 2px 10px #00ffff22;
-      padding: 1.5rem 1.1rem;
-      text-align: center;
-      position: relative;
-      color: var(--subtext);
-      font-size: 1.04rem;
-      font-style: italic;
-    }
-    .testimonial-author {
-      margin-top: 1.1rem;
-      color: var(--accent-violet);
-      font-weight: bold;
-      font-size: 1.03rem;
-    }
-    /* Contact */
-    .contact-form {
-      max-width: 400px;
-      margin: 2rem auto 0 auto;
-      background: var(--card);
-      border-radius: 16px;
-      padding: 2rem 1.3rem 1.5rem 1.3rem;
-      box-shadow: 0 2px 12px #00ffff22;
-      display: flex;
-      flex-direction: column;
-      gap: 1.01rem;
-    }
-    .contact-form label {
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-      color: var(--accent-blue);
-      font-size: 1.08rem;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      border: none;
-      border-radius: 9px;
-      padding: 0.8rem 1rem;
-      background: #23242c;
-      color: var(--text);
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      resize: vertical;
-      font-family: var(--font-body);
-      transition: background var(--transition), border var(--transition);
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      background: #28294a;
-      outline: 2px solid var(--accent-blue);
-    }
-    .contact-btn {
-      align-self: flex-end;
-      padding: 0.7rem 2.3rem;
-      border: none;
-      border-radius: 24px;
-      background: linear-gradient(90deg, var(--accent-violet), var(--accent-blue));
-      color: #18191f;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-    }
-    .contact-btn:hover {
-      background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
-      color: var(--text);
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.6rem;
-      margin: 2rem 0 0 0;
-      flex-wrap: wrap;
-    }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #222;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      color: var(--accent-blue);
-      font-size: 1.6rem;
-      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
-      box-shadow: 0 2px 8px #00ffff22;
-    }
-    .social-link:hover {
-      color: var(--accent-red);
-      background: #18191f;
-      box-shadow: 0 4px 16px #FF003344;
-    }
-    /* Footer */
-    footer {
-      background: #191a22;
-      color: var(--subtext);
-      text-align: center;
-      padding: 1.5rem 0 0.8rem 0;
-      margin-top: auto;
-      font-size: 0.97rem;
-    }
-    .footer-nav {
-      margin-bottom: 0.7rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.9rem;
-      flex-wrap: wrap;
-    }
-    .footer-logo {
-      font-family: var(--font-header);
-      font-size: 1.35rem;
-      color: var(--accent-blue);
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-    /* Responsive */
-    @media (max-width: 900px) {
-      .about-grid { flex-direction: column; gap: 1.8rem;}
-      .services-grid, .portfolio-grid, .music-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      header.hero { min-height: 60vh;}
-      .hero-title { font-size: 1.5rem; }
-      section h2 { font-size: 1.3rem;}
-      .services-grid, .portfolio-grid, .music-grid, .testimonial-grid { grid-template-columns: 1fr;}
-      .about-img img, .track-art, .music-art { width: 120px; height: 120px;}
-      .contact-form { padding: 1.3rem 0.6rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Babypauul — Producer. Engineer. Artist.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Babypauul: Elite sound engineering & raw artistry. Affiliated with KILLSTREETSTUDIOS. Listen, book, and explore the portfolio.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900|Barlow:400,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #111217;
+            --card: #191a22;
+            --accent-blue: #00FFFF;
+            --accent-red: #FF0033;
+            --accent-violet: #B026FF;
+            --text: #F8F9FB;
+            --subtext: #A9A9B8;
+            --font-header: 'Montserrat', 'Anton', Arial, sans-serif;
+            --font-body: 'Barlow', Arial, sans-serif;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s var(--transition), transform 0.6s var(--transition);
+        }
+        section.is-visible { opacity: 1; transform: none; }
+        section:not(:last-of-type) { border-bottom: 1px solid #2a2b38; }
+        
+        h1, h2, h3 { font-family: var(--font-header); line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); text-shadow: 0 2px 20px #000a; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--accent-violet); margin-bottom: 2rem; letter-spacing: 1px; }
+        h3 { font-size: clamp(1.1rem, 2vw, 1.25rem); }
+        
+        a { color: var(--accent-blue); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--accent-violet); }
+
+        /* Header & Hero Section */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            /* IMPORTANT: Replace with your own background image */
+            background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 18, 23, 1) 0%, rgba(17, 18, 23, 0.7) 100%);
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-sub { font-size: 1.2rem; color: var(--text); margin: 1rem 0 2.5rem 0; max-width: 600px; }
+        .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .cta-btn {
+            padding: 0.8rem 2.2rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
+            color: #111217;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px #0ff4; }
+        .cta-btn.secondary { background: transparent; border-color: var(--accent-blue); color: var(--accent-blue); }
+        .cta-btn.secondary:hover { background: var(--accent-blue); color: #111217; }
+        
+        /* About Section */
+        .about-grid { display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; }
+        .about-text { flex: 2 1 400px; }
+        .about-text p { margin-bottom: 1rem; color: var(--subtext); font-size: 1.1rem; }
+        .about-text strong { color: var(--text); }
+        .about-image { flex: 1 1 300px; text-align: center; }
+        .about-image img {
+            width: 250px;
+            height: 250px;
+            max-width: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--accent-violet);
+            box-shadow: 0 0 30px var(--accent-violet);
+            object-fit: cover;
+        }
+
+        /* Grid for Services, Portfolio, etc. */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Service Card */
+        .service-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition);
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--accent-blue); }
+        .service-card .icon {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+            width: 48px; /* Set fixed size for SVGs */
+            height: 48px;
+        }
+        .service-card h3 { color: var(--text); margin-bottom: 0.5rem; }
+        .service-card p { color: var(--subtext); font-size: 0.95rem; }
+
+        /* Portfolio Card */
+        .portfolio-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .portfolio-card .track-info { padding: 1.5rem; }
+        .portfolio-card h3 { color: var(--accent-blue); }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            background: transparent;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .testimonial-card blockquote { margin: 0; font-size: 1.1rem; font-style: italic; }
+        .testimonial-card .author {
+            display: block;
+            margin-top: 1rem;
+            color: var(--accent-violet);
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group textarea {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            background: var(--card);
+            color: var(--text);
+            font-size: 1rem;
+            font-family: var(--font-body);
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--accent-blue); }
+
+        /* Footer */
+        .site-footer {
+            background: var(--card);
+            color: var(--subtext);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 5rem;
+        }
+        .footer-socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .footer-socials a {
+            color: var(--subtext);
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .footer-socials a:hover { color: var(--accent-blue); transform: scale(1.1); }
+        .footer-nav { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+        
+    </style>
 </head>
 <body>
-  <!-- HERO SECTION -->
-  <header class="hero" id="home">
-    <div class="hero-content">
-      <h1 class="hero-title">Babypauul — Producer. Engineer. Artist.</h1>
-      <p class="hero-sub">Crafting next-level sound with clarity, energy, and emotion.</p>
-      <div class="cta-buttons">
-        <a href="#portfolio" class="cta-btn">Listen</a>
-        <a href="#contact" class="cta-btn">Book Now</a>
-        <a href="#portfolio" class="cta-btn">Portfolio</a>
-      </div>
-    </div>
-  </header>
-  <main>
-    <!-- ABOUT SECTION -->
-    <section id="about">
-      <div class="about-grid">
-        <div class="about-text">
-          <b>About Babypauul</b>
-          <p>
-            Babypauul is a multi-disciplinary artist blending elite-level sound engineering with raw lyrical artistry. With 5+ years of experience in modern trap and hip-hop, he delivers precise mixes, heavy-hitting beats, and authentic performances.
-          </p>
-          <p>
-            Passionate about pushing boundaries, Babypauul crafts soundscapes that capture both the energy and emotion of every track. From the studio to the stage, his work is defined by dedication, innovation, and authenticity.
-          </p>
+
+    <header class="hero" id="home" role="banner">
+        <div class="hero-content">
+            <h1>Babypauul</h1>
+            <p class="hero-sub">Elite Sound Engineering & Raw Artistry. Crafting next-level sound with clarity, energy, and emotion for modern trap & hip-hop.</p>
+            <div class="cta-buttons">
+                <a href="#portfolio" class="cta-btn">View Work</a>
+                <a href="#contact" class="cta-btn secondary">Book Session</a>
+            </div>
         </div>
-        <div class="about-img">
-          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Babypauul Portrait" />
-          <!-- Replace with your actual artist photo -->
+    </header>
+
+    <main id="main-content">
+
+        <section id="about" class="container" aria-labelledby="about-heading">
+            <div class="about-grid">
+                <figure class="about-image">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="A portrait of Babypauul in the studio.">
+                </figure>
+                <article class="about-text">
+                    <h2 id="about-heading">About Babypauul</h2>
+                    <p><strong>Babypauul is a multi-disciplinary artist blending elite-level sound engineering with raw lyrical artistry.</strong> Affiliated with **KILLSTREETSTUDIOS**, he has over 5+ years of experience in modern trap and hip-hop, delivering precise mixes, heavy-hitting beats, and authentic performances.</p>
+                    <p>Passionate about pushing boundaries, Babypauul crafts soundscapes that capture both the energy and emotion of every track. From the studio to the stage, his work is defined by dedication, innovation, and authenticity.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="services" class="container" aria-labelledby="services-heading">
+            <h2 id="services-heading">Services</h2>
+            <div class="grid">
+                <div class="service-card">
+                    <div class="icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 6h5v1H8V6zm5 3H8v1h5v-1zm-5 4h8v-1H8v1zm10 5H6v-1h12v1z"/></svg>
+                    </div>
+                    <h3>Beat Production</h3>
+                    <p>Original trap & hip-hop instrumentals tailored to your unique vibe and vision.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9h4V5H3v4zm0 5h4v-4H3v4zm5 0h4v-4H8v4zm5 0h4v-4h-4v4zM8 9h4V5H8v4zm5-4v4h4V5h-4zm5 9h4v-4h-4v4zM3 19h4v-4H3v4zm5 0h4v-4H8v4zm5 0h4v-4h-4v4zm5 0h4v-4h-4v4z"/></svg>
+                    </div>
+                    <h3>Mixing & Mastering</h3>
+                    <p>Professional, streaming-ready mixes and masters with industry-standard clarity and punch.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    </div>
+                    <h3>Vocal Production</h3>
+                    <p>Vocal recording, comping, tuning, and effects to make your performance shine.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container" aria-labelledby="portfolio-heading">
+            <h2 id="portfolio-heading">Discography</h2>
+            <div class="grid">
+                <article class="portfolio-card">
+                    <iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=12345/size=small/bgcol=333333/linkcol=00ffff/transparent=true/" seamless><a href="#">Homie by Babypauul</a></iframe>
+                    <div class="track-info">
+                        <h3>Homie</h3>
+                        <p>Single</p>
+                    </div>
+                </article>
+                <article class="portfolio-card">
+                    <iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=67890/size=small/bgcol=333333/linkcol=00ffff/transparent=true/" seamless><a href="#">Thinking About You by Babypauul</a></iframe>
+                    <div class="track-info">
+                        <h3>Thinking About You</h3>
+                        <p>Single</p>
+                    </div>
+                </article>
+                 <article class="portfolio-card">
+                    <iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=54321/size=small/bgcol=333333/linkcol=00ffff/transparent=true/" seamless><a href="#">Rain by Babypauul</a></iframe>
+                    <div class="track-info">
+                        <h3>Rain</h3>
+                        <p>Single</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="testimonials" class="container" aria-labelledby="testimonials-heading">
+            <h2 id="testimonials-heading">Testimonials</h2>
+            <div class="grid">
+                <div class="testimonial-card">
+                    <blockquote>"Babypauul transformed my vocals into something radio-ready. Insane attention to detail!"</blockquote>
+                    <cite class="author">— Client A</cite>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"His beats always slap, and his mixing is next-level. Highly recommend for any serious artist."</blockquote>
+                    <cite class="author">— Artist B</cite>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"From songwriting to final master, Babypauul delivers nothing but diamond-plated quality."</blockquote>
+                    <cite class="author">— Label Rep</cite>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact / Booking</h2>
+            <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-btn">Send Request</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-socials">
+                 <a href="https://instagram.com/babypauul" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.48.77-2.175 1.465C1.27 2.805.805 3.5.5 4.28c-.305.784-.5 1.655-.563 2.933-.058 1.28-.072 1.687-.072 4.947s.015 3.667.072 4.947c.062 1.278.258 2.15.562 2.933.305.784.77 1.48 1.465 2.175.695.695 1.39.1.165 2.175.3.784 1.655.258 2.933.563 1.28.057 1.687.072 4.947.072 3.26 0 3.667-.015 4.947-.072 1.278-.062 2.15-.258 2.933-.563.784-.305 1.48-.77 2.175-1.465.695-.695 1.165-1.39 1.465-2.175.305-.784.5-1.655.563-2.933.057-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.062-1.278-.258-2.15-.563-2.933-.305-.784-.77-1.48-1.465-2.175C21.195.805 20.5.333 19.717.03 18.933.258 18.062.063 16.783.005 15.503 0 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.07 1.17.055 1.805.248 2.227.415.562.217.96.477 1.382.896.419.42.68.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.056 1.17-.248 1.805-.413 2.227-.217.562-.477.96-.896 1.381-.42.419-.82.68-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.585-.015-4.85-.07c-1.17-.056-1.805-.248-2.227-.413-.562-.217-.96-.477-1.381-.896-.419-.42-.68-.82-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.585.07-4.85c.056-1.17.248-1.805.413-2.227.217-.562.477-.96.896-1.381.42-.419.819-.68 1.381-.896.422-.164 1.057-.36 2.227-.413C8.415 2.176 8.796 2.16 12 2.16zm0 2.75c-3.315 0-6 2.685-6 6s2.685 6 6 6 6-2.685 6-6-2.685-6-6-6zm0 9.84c-2.12 0-3.84-1.72-3.84-3.84s1.72-3.84 3.84-3.84 3.84 1.72 3.84 3.84-1.72 3.84-3.84 3.84zM16.425 6c-.822 0-1.485.663-1.485 1.485s.663 1.485 1.485 1.485 1.485-.663 1.485-1.485S17.247 6 16.425 6z"/></svg>
+                </a>
+                <a href="https://open.spotify.com/artist/06cnhHlFHxlhk85pIkF2jx?si=nnRFRnO0RyyOc0OuaWkyvA" target="_blank" rel="noopener noreferrer" aria-label="Spotify" title="Spotify">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.624 16.23a.75.75 0 01-1.06.216l-3.203-1.962a.75.75 0 01-.216-1.06c.216-.353.645-.468.998-.252l3.203 1.962a.75.75 0 01.278 1.126zm-2.001-2.482a.75.75 0 01-1.06.216l-3.99-2.44a.75.75 0 01-.216-1.06c.216-.353.645-.468.998-.252l3.99 2.44a.75.75 0 01.278 1.126zm.05-2.618a.75.75 0 01-1.06.216L8.85 8.92a.75.75 0 01-.216-1.06c.216-.353.645-.468.998-.252l5.762 3.522a.75.75 0 01.278 1.126z"/></svg>
+                </a>
+                <a href="youtube.com/@prodbabypauul" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.5 6.186C0 8.07 0 12 0 12s0 3.93.5 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+            <nav class="footer-nav" aria-label="Footer Navigation">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <p>&copy; 2025 Babypauul / KILLSTREETSTUDIOS. All rights reserved.</p>
         </div>
-      </div>
-    </section>
-    <!-- SERVICES SECTION -->
-    <section id="services">
-      <h2>🛠 Services</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="icon">🎹</div>
-          <div class="service-title">Beat Production</div>
-          <div class="service-desc">Original trap & hip-hop instrumentals tailored to your vibe.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon">🎛️</div>
-          <div class="service-title">Mixing</div>
-          <div class="service-desc">Stem, vocal, and instrumental mixes with clarity and punch.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon">📈</div>
-          <div class="service-title">Mastering</div>
-          <div class="service-desc">Streaming-ready, loudness-optimized masters for all platforms.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon">🎤</div>
-          <div class="service-title">Songwriting & Recording</div>
-          <div class="service-desc">Hooks, verses, & vocal recording sessions for your next hit.</div>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:2rem;">
-        <a href="#contact" class="service-btn">Request a Quote</a>
-      </div>
-    </section>
-    <!-- PORTFOLIO / TRACKS SECTION -->
-    <section id="portfolio">
-      <h2>🎧 Portfolio / Beats / Tracks</h2>
-      <div class="portfolio-grid">
-        <!-- Example track card, duplicate and change embed links/titles/art as needed -->
-        <div class="track-card">
-          <img src="https://i1.sndcdn.com/artworks-000123456789-abcde-t500x500.jpg" alt="Track Artwork" class="track-art"/>
-          <div class="track-title">Trap Anthem</div>
-          <div class="track-player">
-            <iframe width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay"
-              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/123456789&color=%2300FFFF&inverse=false&auto_play=false&show_user=true">
-            </iframe>
-          </div>
-        </div>
-        <div class="track-card">
-          <img src="https://i1.sndcdn.com/artworks-000987654321-xyz12-t500x500.jpg" alt="Track Artwork" class="track-art"/>
-          <div class="track-title">Late Night Drive</div>
-          <div class="track-player">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1A2B3C4D5E6F7G8H9I0J" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-          </div>
-        </div>
-        <!-- Add more tracks as needed -->
-      </div>
-    </section>
-    <!-- MY MUSIC / RAPPER PROJECTS SECTION -->
-    <section id="music">
-      <h2>🎤 My Music / Rapper Projects</h2>
-      <div class="music-grid">
-        <div class="music-card">
-          <img src="https://i1.sndcdn.com/artworks-000112233445-efghj-t500x500.jpg" alt="EP Artwork" class="music-art"/>
-          <div class="music-title">No Sleep EP</div>
-          <a href="https://soundcloud.com/babypauul/no-sleep-ep" class="music-link" target="_blank">Listen on SoundCloud</a>
-          <div class="music-quote">"No sleep for the driven, only dreams made real."</div>
-        </div>
-        <div class="music-card">
-          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Freestyle Art" class="music-art"/>
-          <div class="music-title">Freestyle Friday</div>
-          <a href="https://youtube.com/watch?v=dQw4w9WgXcQ" class="music-link" target="_blank">Watch on YouTube</a>
-          <div class="music-quote">"Energy raw, bars sharp — this is Babypauul in his element."</div>
-        </div>
-        <!-- Add more projects as needed -->
-      </div>
-    </section>
-    <!-- TESTIMONIALS / COLLABS SECTION -->
-    <section id="testimonials" class="testimonials">
-      <h2>💬 Testimonials / Collaborations</h2>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          "Babypauul transformed my vocals into something radio-ready. Insane attention to detail!"
-          <div class="testimonial-author">— Client A</div>
-        </div>
-        <div class="testimonial-card">
-          "His beats always slap, and his mixing is next-level. Highly recommend for any artist."
-          <div class="testimonial-author">— Artist B</div>
-        </div>
-        <div class="testimonial-card">
-          "From songwriting to final master, Babypauul delivers nothing but quality."
-          <div class="testimonial-author">— Label Rep</div>
-        </div>
-      </div>
-    </section>
-    <!-- CONTACT / BOOKING SECTION -->
-    <section id="contact">
-      <h2>📩 Contact / Booking</h2>
-      <form class="contact-form" autocomplete="off" action="mailto:your@email.com" method="POST" enctype="text/plain">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="Name" required placeholder="Your Name" />
-        <label for="email">Email</label>
-        <input type="email" id="email" name="Email" required placeholder="your@email.com" />
-        <label for="message">Message</label>
-        <textarea id="message" name="Message" rows="4" required placeholder="How can I help you?"></textarea>
-        <button type="submit" class="contact-btn">Send Request</button>
-      </form>
-      <div class="social-links" aria-label="Social media links">
-        <a href="https://instagram.com/" class="social-link" target="_blank" title="Instagram"><span aria-hidden="true">📸</span></a>
-        <a href="https://tiktok.com/" class="social-link" target="_blank" title="TikTok"><span aria-hidden="true">🎵</span></a>
-        <a href="https://open.spotify.com/" class="social-link" target="_blank" title="Spotify"><span aria-hidden="true">🟢</span></a>
-        <a href="https://youtube.com/" class="social-link" target="_blank" title="YouTube"><span aria-hidden="true">▶️</span></a>
-        <a href="https://soundcloud.com/" class="social-link" target="_blank" title="SoundCloud"><span aria-hidden="true">☁️</span></a>
-      </div>
-    </section>
-  </main>
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">Babypauul</span>
-    <nav class="footer-nav">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#music">Music</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div>
-      &copy; Babypauul 2025. All rights reserved.
-    </div>
-  </footer>
-  <!-- Animation: Fade-in on scroll -->
-  <script>
-    // Fade-in sections on scroll
-    const sections = document.querySelectorAll('section');
-    function revealSections() {
-      const trigger = window.innerHeight * 0.85;
-      sections.forEach(sec => {
-        const top = sec.getBoundingClientRect().top;
-        if (top < trigger) sec.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('DOMContentLoaded', revealSections);
-    // Smooth scroll polyfill for older browsers (optional)
-    if (!('scrollBehavior' in document.documentElement.style)) {
-      document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-          const target = document.getElementById(this.getAttribute('href').slice(1));
-          if (target) {
-            e.preventDefault();
-            window.scrollTo(0, target.offsetTop - 40);
-          }
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
-      });
-    }
-  </script>
+    </script>
 </body>
 </html>
+```
